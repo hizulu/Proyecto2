@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     public PlayerInput PlayerInput { get; private set; }
 
-
+    protected PlayerStatsData statsData;
 
     private void Awake()
     {
@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
         playerStateMachine = new PlayerStateMachine(this);
 
         PlayerInput.PlayerActions.Inventory.performed += OpenCloseInventory;
+
+        statsData = Data.StatsData;
     }
 
     private void OnDestroy()
@@ -89,6 +91,15 @@ public class Player : MonoBehaviour
     public void OpenCloseInventory(InputAction.CallbackContext context)
     {
         InventoryManager.Instance.OpenCloseInventory(context);
+    }
+
+    public void TakeDamage(float _enemyDamage)
+    {
+        statsData.CurrentHealth -= _enemyDamage;
+        Debug.Log(statsData.CurrentHealth);
+        if (statsData.CurrentHealth <= 0)
+            Debug.Log("murió");
+            //stateMachine.ChangeState(stateMachine.HalfDeadState);
     }
 
     #region Métodos temporales (No se sabe si se quedarán en el script de Player o se moverán).

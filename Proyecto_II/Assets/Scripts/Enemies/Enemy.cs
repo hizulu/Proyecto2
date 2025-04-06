@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : HittableElement
 {
     public Player player;
     public Animator anim { get; private set; }
@@ -83,11 +83,17 @@ public class Enemy : MonoBehaviour
         rb.velocity = velocity;
     }
 
+    public override void OnHit()
+    {
+        DamageEnemy(10f);
+    }
+
     #region DamageRelated Functions
     // Function called from Player script
     public void DamageEnemy (float damageAmount)
     {
         currentHealth -= damageAmount;
+        Debug.Log("enemigo recibe daño");
         // TODO: anim.SetTrigger("getDamaged");
         // TODO: play enemy damage sound depending on enemy
         matForDepuration.color = Color.red; // TEMP
@@ -101,6 +107,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         MoveEnemy(Vector3.zero);
+        Debug.Log("enemigo muere");
         // TODO: anim.SetBool("isDead", true);
         // TODO: play enemy death sound depending on enemy
         // TODO: character deactivation (collider, script...)

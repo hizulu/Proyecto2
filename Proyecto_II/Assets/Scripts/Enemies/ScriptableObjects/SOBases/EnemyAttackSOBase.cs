@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyAttackSOBase : ScriptableObject
 {
@@ -8,6 +9,7 @@ public class EnemyAttackSOBase : ScriptableObject
     protected Transform transform;
     protected GameObject gameObject;
     protected Transform playerTransform;
+    protected Player player;
 
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
@@ -15,6 +17,7 @@ public class EnemyAttackSOBase : ScriptableObject
         transform = gameObject.transform;
         this.enemy = enemy;
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
     public virtual void DoEnterLogic() { }

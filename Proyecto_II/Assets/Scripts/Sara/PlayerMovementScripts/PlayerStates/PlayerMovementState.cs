@@ -17,7 +17,7 @@ public class PlayerMovementState : IState
 
     protected readonly PlayerGroundedData groundedData;
     protected readonly PlayerAirborneData airborneData;
-    protected readonly PlayerStatsData statsData;
+    //protected readonly PlayerStatsData statsData;
 
     public PlayerMovementState(PlayerStateMachine _stateMachine)
     {
@@ -25,7 +25,7 @@ public class PlayerMovementState : IState
 
         groundedData = stateMachine.Player.Data.GroundedData;
         airborneData = stateMachine.Player.Data.AirborneData;
-        statsData = stateMachine.Player.Data.StatsData;
+        //statsData = stateMachine.Player.Data.StatsData;
     }
 
     public virtual void Enter()
@@ -62,8 +62,8 @@ public class PlayerMovementState : IState
             //return;
         }
 
-        if (collider.CompareTag("Enemy"))
-            TakeDamage(50);
+        if (collider.CompareTag("Enemy")) ;
+            //TakeDamage(50);
     }
 
     public virtual void OnTriggerExit(Collider collider)
@@ -161,11 +161,11 @@ public class PlayerMovementState : IState
     }
 
 
-    private void TakeDamage(float _enemyDamage)
-    {
-        statsData.CurrentHealth -= _enemyDamage;
-        Debug.Log(statsData.CurrentHealth);
-        if (statsData.CurrentHealth <= 0)
-            stateMachine.ChangeState(stateMachine.HalfDeadState);
-    }
+    //private void TakeDamage(float _enemyDamage)
+    //{
+    //    statsData.CurrentHealth -= _enemyDamage;
+    //    Debug.Log(statsData.CurrentHealth);
+    //    if (statsData.CurrentHealth <= 0)
+    //        stateMachine.ChangeState(stateMachine.HalfDeadState);
+    //}
 }

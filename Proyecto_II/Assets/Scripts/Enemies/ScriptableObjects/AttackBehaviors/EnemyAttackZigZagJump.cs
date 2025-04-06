@@ -107,7 +107,7 @@ public class EnemyAttackZigZagJump : EnemyAttackSOBase
         // Called after three zig zags done
         // TODO: enemy.anim.SetTrigger("ataca");
         // TODO: play enemy attack sound depending on enemy
-        // TODO: que el jugador reciba daño, llamar a función de player
+        player.TakeDamage(50f);
         isAttacking = false;
         enemy.doAttack = false;
         enemy.doRetreat = true;
